@@ -10,18 +10,18 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
-    <title>Log-In with RNRD</title>
+    <title>RNRD Log-in</title>
 </head>
 
 <body>
     <div class="container">
 
-            <div id="login-logo" class="row">
-                    <div class="col m12">
-                        <img src="../public/assets/images/RNRD-Logo_Final.png" alt="rnrd-logo" width="600px" class="responsive-img-class">
-                    </div>
-                </div>
-        
+        <div id="login-logo" class="row">
+            <div class="col m12">
+                <img id="loginImg" src="../public/assets/images/RNRD-Logo_Final.png" alt="rnrd-logo" width="600px" class="responsive-img-class">
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-12">
                 <div id="sign-in">
@@ -29,11 +29,15 @@
                     <form class="login">
                         <input class="form-control" type="text" placeholder="Username" />
                         <input class="form-control" type="password" placeholder="Password" />
-                        <input id="submit-button" class="form-control" type="submit" value="Sign In" class="btn btn-success btn-sm" />
+                        <a href="search.html">
+                            <input id="submit-button" class="form-control" type="submit" value="Sign In" class="btn btn-success btn-sm" />
+                        </a>
+                        <a href="#" onClick="window.open('search.html', 'frameName'); return false">
                     </form>
                 </div>
             </div>
         </div>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>

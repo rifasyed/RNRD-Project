@@ -18,6 +18,27 @@ body {
 
 }
 
+element.style {
+    max-width: 600px;
+}
+
+#logoTest {
+    width: 600px;
+}
+
+.responsive-img-class {
+    max-width: 100%;
+    margin: 50px 0 5px -180px;
+    padding-left: 22%;
+    padding-right: 26%;   
+}
+#loginImg{    
+}
+#searchImg{
+}
+#resultsImg{
+}
+
 .responsive-img-class {
     max-width: 100%;
     margin: 50px 0 5px -180px;
@@ -104,11 +125,13 @@ form.login a:hover {
 
 /* ///////////////////////////////////////////// */
 
-#searchBarDiv {
+#searchDiv {
+    position: relative;
     margin: 0 auto;
     top: 80px;
+    height: 100%;
     width: 400px;
-    position: relative;
+    /* border: 2px solid black; */
 }
 
 #search-input {
@@ -117,17 +140,21 @@ form.login a:hover {
     color: black;
 }
 
-.cardYt {
-    background-color: rgba(224, 233, 230, 0.208);
-    position: relative;
-    margin: 0 auto;
-    top: 100px;
-    height: 100%;
-    max-width: 100%;
-    border: 2px solid black;
+#submitBTN{
+    /* font-family: 'Abril Fatface', cursive; */
+    /* background-color: rgb(236, 124, 48); */
+    color: white;
+    background-image: url(../images/searchicon.png);
+    background-image: no-repeat;
+    width: auto;
+    height: 29px;
+    background-position: center;
+    background-size: 140%;
+    float: right;
+    top: -49px;
 }
 
-.ticketmaster-container {
+#cardYt {
     background-color: rgba(224, 233, 230, 0.208);
     position: relative;
     margin: 0 auto;
@@ -135,6 +162,28 @@ form.login a:hover {
     height: 100%;
     max-width: 100%;
     border: 2px solid black;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 20px;
+    color: rgb(55, 50, 50);
+    letter-spacing: 4px;
+
+Add Comment
+}
+
+#ticketmaster-container {
+    background-color: rgba(224, 233, 230, 0.208);
+    position: relative;
+    margin: 0 auto;
+    top: 100px;
+    height: 100%;
+    max-width: 100%;
+    border: 2px solid black;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 20px;
+    color: rgb(55, 50, 50);
+    letter-spacing: 4px;
+
+Add Comment
 }
 
 .vid-container {
@@ -144,4 +193,14 @@ form.login a:hover {
 
 .copyright {
     font-size: 8px;
+}
+
+#whatToSearch{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 20px;
+    color: rgb(55, 50, 50);
+    letter-spacing: 4px;
+}
+#searchBarDiv{
+    top: 200px;
 }

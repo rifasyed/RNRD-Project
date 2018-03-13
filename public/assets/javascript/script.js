@@ -1,6 +1,13 @@
 $(document).ready(function () {
     // click listener for submit button
+    $("#submit-button").on('click', function () {
+        if ($("input").val()) {
+            event.preventDefault()
+            window.open("search.html", "_self")
+        }
+    })
     $("#submitBTN").on('click', function () {
+        // window.open('/Users/appleuser/Desktop/coding/RNRD-Project-RC/public/results.html', '_self'); 
         if ($("input").val()) {
             event.preventDefault()
             fetchTracks()
@@ -44,7 +51,9 @@ $(document).ready(function () {
                 q: artist + '' + song,
                 type: 'video',
                 part: 'snippet'
-            }, { maxResults: 1 }),
+            }, {
+                maxResults: 1
+            }),
             dataType: 'json',
             type: 'GET',
             timeout: 5000,
@@ -56,23 +65,23 @@ $(document).ready(function () {
                 var vidContainer = $("<div>")
                 vidContainer.addClass("vid-container col-lg-4")
                 vidContainer.attr("id", "vid-" + index)
-                
+
                 // create iframe for video search result, append to video container
                 var newVid = $("<iframe>")
                 newVid.attr("frameborder", "0")
                 var vidID = response.items[0].id.videoId
                 newVid.attr("src", "http://www.youtube.com/embed/" + vidID)
                 vidContainer.append(newVid)
-                
+
                 // add title to video container, append to video container
                 var vidTitle = response.items[0].snippet.title
                 var newTitle = $("<p>")
                 newTitle.text(vidTitle)
                 vidContainer.append(newTitle)
-                
+
                 // append container to results div
                 $(".results").append(vidContainer)
-                
+
                 // pass song id and position into fetchLyrics function
                 fetchLyrics(songID, index)
             }
@@ -107,6 +116,7 @@ $(document).ready(function () {
             }
         })
     }
+
     function fetchEvents() {
         $.ajax({
             type: "GET",
@@ -160,7 +170,7 @@ $(document).ready(function () {
                     newLine.append(newLoc)
                     newLine.append(link)
 
-                    $(".ticketmaster-container").append(newLine)
+                    $("#ticketmaster-container").append(newLine)
                 }
             }
         })
