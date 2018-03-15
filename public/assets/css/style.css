@@ -1,53 +1,76 @@
-/* .typewriter-intro {
-    background-color:#ce3635;
-    text-align: center;
-    color:#fff;
-    padding-top:10em;
-  }
-  
-  * { color:#fff; text-decoration: none;}
-  
-  
-  Add CommentCollapse  */
-body
-{
-    background: url("../images/sunsetBG.jpg") fixed no-repeat;
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body {
+    background: url("../images/project1bg5.jpg") fixed no-repeat;
     background-size: cover;
     padding: 0;
     margin: 0;
 }
 
-.wrap
-{
-    width: 100%;
-    height: 100%;
-    min-height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 99;
+#login-logo {
+    max-width: 100%;
+    margin: 100px auto;
+    height: 50px;
+    padding-left: 40%;
+
 }
 
-p.form-title
-{
-    font-family: 'Open Sans' , sans-serif;
+element.style {
+    max-width: 600px;
+}
+
+#logoTest {
+    width: 600px;
+}
+
+.responsive-img-class {
+    max-width: 100%;
+    margin: 50px 0 5px -180px;
+    padding-left: 22%;
+    padding-right: 26%;   
+}
+#loginImg{    
+}
+#searchImg{
+}
+#resultsImg{
+}
+
+.responsive-img-class {
+    max-width: 100%;
+    margin: 50px 0 5px -180px;
+    padding-left: 22%;
+    padding-right: 26%;
+    
+}
+
+#sign-in {
+    background-color: rgba(41, 42, 50, 0.297);
+    position: relative;
+    margin: 0 auto;
+    padding-right: 15px;
+    padding-bottom: 20px;
+    width: 300px;
+}
+
+p.form-title {
+    font-family: 'Quicksand', sans-serif;
     font-size: 20px;
-    font-weight: 600;
     text-align: center;
-    color: #FFFFFF;
-    margin-top: 5%;
-    text-transform: uppercase;
+    color: rgb(255, 255, 255);
     letter-spacing: 4px;
 }
 
-form
-{
+form {
     width: 250px;
     margin: 0 auto;
 }
 
-form.login input[type="text"], form.login input[type="password"]
-{
+form.login input[type="text"],
+form.login input[type="password"] {
     width: 100%;
     margin: 0;
     padding: 5px 10px;
@@ -55,138 +78,129 @@ form.login input[type="text"], form.login input[type="password"]
     border: 0;
     border-bottom: 1px solid #FFFFFF;
     outline: 0;
-    font-style: italic;
-    font-size: 12px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 20px;
     font-weight: 400;
     letter-spacing: 1px;
     margin-bottom: 5px;
-    color: #FFFFFF;
+    color: black;
     outline: 0;
 }
 
-form.login input[type="submit"]
-{
+#submit-button {
+   margin-left: 8px;
+   margin-right: auto;
+}
+
+form.login input[type="submit"] {
     width: 100%;
     font-size: 14px;
     text-transform: uppercase;
     font-weight: 500;
     margin-top: 16px;
+    color: black;
     outline: 0;
     cursor: pointer;
     letter-spacing: 1px;
 }
 
-form.login input[type="submit"]:hover
-{
+form.login input[type="submit"]:hover {
     transition: background-color 0.5s ease;
 }
 
-form.login .remember-forgot
-{
-    float: left;
-    width: 100%;
-    margin: 10px 0 0 0;
-}
-form.login .forgot-pass-content
-{
-    min-height: 20px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-form.login label, form.login a
-{
+form.login label,
+form.login a {
     font-size: 12px;
     font-weight: 400;
     color: #FFFFFF;
 }
 
-form.login a
-{
+form.login a {
     transition: color 0.5s ease;
 }
 
-form.login a:hover
-{
-    color: #2ecc71;
+form.login a:hover {
+    color: #1cce69af;
 }
 
-.pr-wrap
-{
-    width: 100%;
-    height: 100%;
-    min-height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 999;
-    display: none;
-}
+/* ///////////////////////////////////////////// */
 
-.show-pass-reset
-{
-    display: block !important;
-}
-
-.pass-reset
-{
-    margin: 0 auto;
-    width: 250px;
+#searchDiv {
     position: relative;
-    margin-top: 22%;
-    z-index: 999;
-    background: #FFFFFF;
-    padding: 20px 15px;
-}
-
-.pass-reset label
-{
-    font-size: 12px;
-    font-weight: 400;
-    margin-bottom: 15px;
-}
-
-.pass-reset input[type="email"]
-{
-    width: 100%;
-    margin: 5px 0 0 0;
-    padding: 5px 10px;
-    background: 0;
-    border: 0;
-    border-bottom: 1px solid #000000;
-    outline: 0;
-    font-style: italic;
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 1px;
-    margin-bottom: 5px;
-    color: #000000;
-    outline: 0;
-}
-
-.pass-reset input[type="submit"]
-{
-    width: 100%;
-    border: 0;
-    font-size: 14px;
-    text-transform: uppercase;
-    font-weight: 500;
-    margin-top: 10px;
-    outline: 0;
-    cursor: pointer;
-    letter-spacing: 1px;
-}
-
-.pass-reset input[type="submit"]:hover
-{
-    transition: background-color 0.5s ease;
-}
-.posted-by
-{
-    position: absolute;
-    bottom: 26px;
     margin: 0 auto;
-    color: #FFF;
-    background-color: rgba(0, 0, 0, 0.66);
-    padding: 10px;
-    left: 45%;
+    top: 80px;
+    height: 100%;
+    width: 400px;
+    /* border: 2px solid black; */
+}
+
+#search-input {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 40px;
+    color: black;
+}
+
+#submitBTN{
+    /* font-family: 'Abril Fatface', cursive; */
+    /* background-color: rgb(236, 124, 48); */
+    color: white;
+    background-image: url(../images/searchicon.png);
+    background-image: no-repeat;
+    width: auto;
+    height: 29px;
+    background-position: center;
+    background-size: 140%;
+    float: right;
+    top: -49px;
+}
+
+#cardYt {
+    background-color: rgba(224, 233, 230, 0.208);
+    position: relative;
+    margin: 0 auto;
+    top: 100px;
+    height: 100%;
+    max-width: 100%;
+    border: 2px solid black;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 20px;
+    color: rgb(55, 50, 50);
+    letter-spacing: 4px;
+
+Add Comment
+}
+
+#ticketmaster-container {
+    background-color: rgba(224, 233, 230, 0.208);
+    position: relative;
+    margin: 0 auto;
+    top: 100px;
+    height: 100%;
+    max-width: 100%;
+    border: 2px solid black;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 20px;
+    color: rgb(55, 50, 50);
+    letter-spacing: 4px;
+
+Add Comment
+}
+
+.vid-container {
+    border: 1px solid #999999;
+    margin: 5px;
+}
+
+.copyright {
+    font-size: 8px;
+}
+
+#whatToSearch{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 20px;
+    color: rgb(55, 50, 50);
+    letter-spacing: 4px;
+}
+#searchBarDiv{
+    top: 200px;
 }

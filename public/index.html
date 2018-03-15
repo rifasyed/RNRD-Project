@@ -1,66 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script  src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <title>RNRD Log-in</title>
 </head>
+
 <body>
-<!-- Page 1 -->
-  <div class="typewriter-intro">
-        <h1>
-            <a href="" class="typewrite" data-period="2000" data-type='[ "welcome to r  n  r  d" ]'>
-              <span class="wrap"></span>
-            </a>
-        </h1>
-  </div>
     <div class="container">
+
+        <div id="login-logo" class="row">
+            <div class="col m12">
+                <img id="loginImg" src="../public/assets/images/RNRD-Logo_Final.png" alt="rnrd-logo" width="600px" class="responsive-img-class">
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-12">
-                <div class="pr-wrap">
-                    <div class="pass-reset">
-                        <label>
-                            Enter the email you signed up with</label>
-                        <input type="email" placeholder="Email" />
-                        <input type="submit" value="Submit" class="pass-reset-submit btn btn-success btn-sm" />
-                    </div>
-                </div>
-                <div class="wrap">
-                    <p class="form-title">
-                        Sign In</p>
+                <div id="sign-in">
+                    <p class="form-title">SIGN IN</p>
                     <form class="login">
-                    <input type="text" placeholder="Username" />
-                    <input type="password" placeholder="Password" />
-                    <input type="submit" value="Sign In" class="btn btn-success btn-sm" />
-                    <div class="remember-forgot">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" />
-                                        Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-6 forgot-pass-content">
-                                <a href="javascript:void(0)" class="forgot-pass">Forgot Password</a>
-                            </div>
-                        </div>
-                    </div>
+                        <input class="form-control" type="text" placeholder="Username" />
+                        <input class="form-control" type="password" placeholder="Password" />
+                        <a href="search.html">
+                            <input id="submit-button" class="form-control" type="submit" value="Sign In" class="btn btn-success btn-sm" />
+                        </a>
+                        <a href="#" onClick="window.open('search.html', 'frameName'); return false">
                     </form>
                 </div>
             </div>
         </div>
+
     </div>
 
-<!-- Page 2 -->
-
-<!-- Page 3 -->
-
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=init"></script>
+    <script src="assets/javascript/script.js"></script>
 </body>
+
 </html>
