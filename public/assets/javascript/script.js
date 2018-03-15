@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     // click listener for submit button
     $("#submit-button").on('click', function () {
         if ($("input").val()) {
@@ -6,42 +7,49 @@ $(document).ready(function () {
             window.open("search.html", "_self")
         }
     })
+    
     $("#submitBTN").on('click', function () {
-        // window.open('/Users/appleuser/Desktop/coding/RNRD-Project-RC/public/results.html', '_self'); 
+        event.preventDefault()
         if ($("input").val()) {
-            event.preventDefault()
-            fetchTracks()
-            fetchEvents()
+            var query = $("input").val().trim()
+            fetchTracks(query)
+            fetchEvents(query)
         }
     })
-
+    
+    function defaultSearch() {
+        var artistArray = ["logic", "pink floyd", "the national", "royal blood", "pepper", "tame impala", "thrice"]
+        var randomArtist = artistArray[Math.floor((Math.random() * artistArray.length))]
+        fetchTracks(randomArtist)
+        fetchEvents(randomArtist)
+        $("#search-input").attr("placeholder", randomArtist)
+    }
+    
     // call MusicXMatch API using track.search method to retrieve song titles to use as YouTube search queries
-    function fetchTracks() {
+    function fetchTracks(query) {
         $.ajax({
             type: "GET",
             url: "http://api.musixmatch.com/ws/1.1/track.search",
             data: {
                 apikey: "af8763b8168a8ce43b3f473c4832754e",
-                q_artist: $("input").val(),
+                q_artist: query,
                 page_size: 4,
                 format: "jsonp"
             },
             dataType: "jsonp",
             success: function (response) {
                 // pull first 4 track names, artist name, and song ID (to search for lyrics using fetchLyrics)
-                console.log(response)
                 $('.results').empty()
                 for (index in response.message.body.track_list) {
                     var artist = response.message.body.track_list[index].track.artist_name
                     var song = response.message.body.track_list[index].track.track_name
                     var songID = response.message.body.track_list[index].track.track_id
-                    console.log("artist: " + artist, "song: " + song)
                     youtubeApiCall(artist, song, songID, index)
                 }
             }
         })
     }
-
+    
     // call YouTube
     function youtubeApiCall(artist, song, songID, index) {
         $.ajax({
@@ -50,6 +58,9 @@ $(document).ready(function () {
                 key: 'AIzaSyBELBleJ5s5uOzjgVXJx1nlfI_d6ZsK5Aw',
                 q: artist + '' + song,
                 type: 'video',
+                videoSyndicated: true,
+                videoEmbeddable: true,
+                videoLicense: 'youtube',
                 part: 'snippet'
             }, {
                 maxResults: 1
@@ -59,37 +70,37 @@ $(document).ready(function () {
             timeout: 5000,
             url: 'https://www.googleapis.com/youtube/v3/search',
             success: function (response) {
-                // pull video data and construct iframe player (EDIT THIS SECTION TO INTEGRATE)
-
-                // create new div to act as video container
-                var vidContainer = $("<div>")
-                vidContainer.addClass("vid-container col-lg-4")
-                vidContainer.attr("id", "vid-" + index)
-
+                // pull video data and construct iframe player
+                
+                // create new div to act as trak container for video and lyrics
+                var trackContainer = $("<tr>").addClass("track-container row").attr("id", "track-" + index)
+                var vidContainer = $("<div>").addClass("vid-container col-md-6")
+                
+                // add title to video container, append to video container
+                var vidTitle = response.items[0].snippet.title
+                var newTitle = $("<h5>").addClass("vid-title")
+                newTitle.text(vidTitle)
+                vidContainer.append(newTitle)
+                
                 // create iframe for video search result, append to video container
-                var newVid = $("<iframe>")
-                newVid.attr("frameborder", "0")
+                var newVid = $("<iframe>").attr("frameborder", "0") // .attr("height", 336).attr("width", 600)
                 var vidID = response.items[0].id.videoId
                 newVid.attr("src", "http://www.youtube.com/embed/" + vidID)
                 vidContainer.append(newVid)
-
-                // add title to video container, append to video container
-                var vidTitle = response.items[0].snippet.title
-                var newTitle = $("<p>")
-                newTitle.text(vidTitle)
-                vidContainer.append(newTitle)
-
+                
+                // append video container to track container
+                trackContainer.append(vidContainer)
+                
                 // append container to results div
-                $(".results").append(vidContainer)
-
+                $(".results").append(trackContainer)
+                
                 // pass song id and position into fetchLyrics function
                 fetchLyrics(songID, index)
             }
         })
     }
-
-
-    // call MusicXMatch API using track.lyrics.get method to retrieve lyrics for song title returned by YouTube search
+    
+    // call MusixMatch API using track.lyrics.get method to retrieve lyrics for song title returned by YouTube search
     function fetchLyrics(songID, index) {
         $.ajax({
             type: "GET",
@@ -101,23 +112,38 @@ $(document).ready(function () {
             },
             dataType: "jsonp",
             success: function (response) {
+                // create new div to act as lyrics container
+                var lyricsContainer = $("<div>")
+                lyricsContainer.addClass("lyrics-container col-md-6")
+                lyricsContainer.attr("id", "lyrics-" + index)
                 // pull lyrics, copyright, and link data (EDIT THIS SECTION TO INTEGRATE)
-                var copyright = $("<p>").text(response.message.body.lyrics.lyrics_copyright)
-                copyright.addClass("copyright")
+                
+                var lyricsSample = $("<h5>").text("Lyrics Sample")
+                lyricsContainer.append(lyricsSample)
+                
+                var lyrics = response.message.body.lyrics.lyrics_body
+                var lyricsSnippet = $('<p class="flow-text">').text(lyrics.slice(0, 200) + "...")
+                lyricsContainer.append(lyricsSnippet)
+                
                 var lyricsURL = $("<a>").attr("href", response.message.body.lyrics.backlink_url)
                 lyricsURL.text("full lyrics")
-                var lyrics = response.message.body.lyrics.lyrics_body
-                var lyricsSnippet = $("<p>").text(lyrics.slice(0, 200) + "...")
-
-                $("#vid-" + index).append($("<h5>").text("Lyrics Sample"))
-                $("#vid-" + index).append(lyricsSnippet)
-                $("#vid-" + index).append(lyricsURL)
-                $("#vid-" + index).append(copyright)
+                lyricsContainer.append(lyricsURL)
+                
+                var copyright = $("<p>").text(response.message.body.lyrics.lyrics_copyright)
+                copyright.addClass("copyright")
+                lyricsContainer.append(copyright)
+                
+                $("#lyrics-" + index).append(lyricsSnippet)
+                $("#lyrics-" + index).append(lyricsURL)
+                $("#lyrics-" + index).append(copyright)
+                
+                // append container to appropriate track container
+                $("#track-" + index).append(lyricsContainer)
             }
         })
     }
-
-    function fetchEvents() {
+    
+    function fetchEvents(query) {
         $.ajax({
             type: "GET",
             url: "https://app.ticketmaster.com/discovery/v2/events.json?",
@@ -125,23 +151,20 @@ $(document).ready(function () {
                 apikey: "o6J3jBABhcb5ppZPQggVw453G8JGuwPg",
                 // countryCode: "US"
                 async: true,
-                keyword: $("input").val().trim(),
+                keyword: query,
                 format: "json"
             },
             dataType: "json",
             success: function (response) {
-                console.log(response.page.totalPages)
                 $(".event").remove()
                 if (response.page.totalPages == 0) {
-                    console.log("hi")
                     var errorMessage = $("<p>No Upcoming Events :(</p>").addClass("event")
-                    console.log(errorMessage)
-                    $(".container").append(errorMessage)
+                    $("#event-table").append(errorMessage)
                     return
                 }
                 $(".event").remove()
-                for (var i = 0; i < 5; i++) {
-                    console.log(response)
+                for (var i = 0; i < 4; i++) {
+                    // grab and store all relevant concert data from json object
                     var date = response._embedded.events[i].dates.start.localDate
                     var venue = response._embedded.events[i]._embedded.venues[0].name
                     var city = response._embedded.events[i]._embedded.venues[0].city.name
@@ -150,32 +173,43 @@ $(document).ready(function () {
                         state = response._embedded.events[i]._embedded.venues[0].state.name
                     }
                     var country = response._embedded.events[i]._embedded.venues[0].country.countryCode
-
-                    var url = $("<a>").text("Venue").attr("href", response._embedded.events[i].url)
-
-                    var newDate = $("<p>").text(date).addClass("col-md-4")
-
+                    
+                    
+                    // create link to venue/ticket purchase
+                    var url = $("<a>").text(venue).attr("href", response._embedded.events[i].url)
+                    
+                    var newDate = $("<td>").text(date)
+                    
                     var text
                     if (state) {
                         text = city + ", " + state + ", " + country
                     } else {
                         text = city + ", " + country
                     }
-                    var newLoc = $("<p>").text(text).addClass("col-md-4")
-
-                    var link = url.addClass("col-md-4")
-
-                    var newLine = $("<div>").addClass("row event")
+                    
+                    var newLoc = $("<td>").text(text)
+                    
+                    var link = $("<td>").append(url)
+                    
+                    var newLine = $("<tr>").addClass("event")
+                    
                     newLine.append(newDate)
                     newLine.append(newLoc)
                     newLine.append(link)
-
-                    $("#ticketmaster-container").append(newLine)
+                    
+                    $("#event-table").append(newLine)
                 }
             }
         })
     }
+    
+    defaultSearch()
 
+    $("#nav-text-concerts").on("click", function () {
+        $(document).scrollTop($("#ticketmaster-container").offset().top-80, 1000);
+    })
 
-
+    $("#nav-text-videos").on("click", function () {
+        $(document).scrollTop($("#cardYt").offset().top-80, 1000)
+    })
 })
