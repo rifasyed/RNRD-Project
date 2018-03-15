@@ -29,7 +29,7 @@ $(document).ready(function () {
     function fetchTracks(query) {
         $.ajax({
             type: "GET",
-            url: "http://api.musixmatch.com/ws/1.1/track.search",
+            url: "https://api.musixmatch.com/ws/1.1/track.search",
             data: {
                 apikey: "af8763b8168a8ce43b3f473c4832754e",
                 q_artist: query,
@@ -85,7 +85,7 @@ $(document).ready(function () {
                 // create iframe for video search result, append to video container
                 var newVid = $("<iframe>").attr("frameborder", "0") // .attr("height", 336).attr("width", 600)
                 var vidID = response.items[0].id.videoId
-                newVid.attr("src", "http://www.youtube.com/embed/" + vidID)
+                newVid.attr("src", "https://www.youtube.com/embed/" + vidID)
                 vidContainer.append(newVid)
                 
                 // append video container to track container
@@ -104,7 +104,7 @@ $(document).ready(function () {
     function fetchLyrics(songID, index) {
         $.ajax({
             type: "GET",
-            url: "http://api.musixmatch.com/ws/1.1/track.lyrics.get",
+            url: "https://api.musixmatch.com/ws/1.1/track.lyrics.get",
             data: {
                 apikey: "af8763b8168a8ce43b3f473c4832754e",
                 track_id: songID,
